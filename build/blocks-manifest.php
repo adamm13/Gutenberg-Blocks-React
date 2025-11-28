@@ -16,6 +16,12 @@ return array(
 		'supports' => array(
 			'html' => false
 		),
+		'attributes' => array(
+			'enableTopCurve' => array(
+				'type' => 'boolean',
+				'default' => 'true'
+			)
+		),
 		'textdomain' => 'blockylicious',
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',

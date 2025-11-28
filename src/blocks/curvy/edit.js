@@ -30,22 +30,25 @@ import './editor.scss';
  *
  * @return {Element} Element to render.
  */
-export default function Edit() {
+import metadata from './block.json';
+
+export default function Edit(props) {
+console.log({props});{
 	return (
 		<>		<p { ...useBlockProps() }>
 			
-			{ __( 'Curvy – hello from the editor!', 'curvy' ) }
+			{ __( 'Curvy – hello from the editor!', metadata.textdomain ) }
 		</p>
 		<InspectorControls>
-			<PanelBody title="Top Curve">
+			<PanelBody title={__("Top Curve", metadata.textdomain)}>
 				<div style={{display: "flex"}}>
-					<ToggleControl />
+					<ToggleControl checked={props.attributes.enableTopCurve} onChange={(value) => props.setAttributes({enableTopCurve: value})} />
 					<span>
-						Enable Top Curve
+						{__("Enable Top Curve", metadata.textdomain)}
 					</span>
 				</div>
 			</PanelBody>
 		</InspectorControls>
 	</>
-	);
+	);}
 }
