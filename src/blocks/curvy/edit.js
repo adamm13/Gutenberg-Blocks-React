@@ -12,7 +12,7 @@ import { __ } from '@wordpress/i18n';
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import {PanelBody, ToggleControl} from "@wordpress/components";
+import {HorizontalRule, PanelBody, ToggleControl, RangeControl} from "@wordpress/components";
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -50,6 +50,31 @@ export default function Edit(props) {
 						{__("Enable Top Curve", metadata.textdomain)}
 					</span>
 				</div>
+				{props.attributes.enableTopCurve &&
+				<>
+					<HorizontalRule />
+					<RangeControl 
+					min={100}
+					max={300}
+					value ={props.attributes.topWidth || 100}
+					onChange={(newValue) => {
+						props.setAttributes({
+							topWidth: newValue});
+					}}	
+					label={__("Width", metadata.textdomain)} 
+					/>
+					<RangeControl 
+					min={0}
+					max={200}
+					value ={props.attributes.topHeight || 100}
+					onChange={(newValue) => {
+						props.setAttributes({
+							topHeight: newValue});
+					}}	
+					label={__("Height", metadata.textdomain)} 
+					/>
+				</>
+		}
 			</PanelBody>
 		</InspectorControls>
 	</>

@@ -30,12 +30,28 @@ return array(
 				'default' => array(
 					'color' => array(
 						'background' => '#ec4899'
+					),
+					'spacing' => array(
+						'padding' => array(
+							'top' => '80px',
+							'bottom' => '80px',
+							'left' => '50px',
+							'right' => '50px'
+						)
 					)
 				)
 			),
 			'enableTopCurve' => array(
 				'type' => 'boolean',
 				'default' => true
+			),
+			'topWidth' => array(
+				'type' => 'number',
+				'default' => 100
+			),
+			'topHeight' => array(
+				'type' => 'number',
+				'default' => 100
 			)
 		),
 		'textdomain' => 'blockylicious',
