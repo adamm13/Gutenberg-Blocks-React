@@ -52,6 +52,14 @@ return array(
 			'topHeight' => array(
 				'type' => 'number',
 				'default' => 100
+			),
+			'topFlipX' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'topFlipY' => array(
+				'type' => 'boolean',
+				'default' => false
 			)
 		),
 		'textdomain' => 'blockylicious',

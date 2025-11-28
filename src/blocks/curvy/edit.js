@@ -40,7 +40,7 @@ export default function Edit(props) {
 		<>
 		<section className={`${className} alignfull`} {...blockProps}> 
 			{props.attributes.enableTopCurve &&
-			<Curve />	}
+			<Curve height={props.attributes.topHeight} width={props.attributes.topWidth} />	}
 		</section>	
 		<InspectorControls>
 			<PanelBody title={__("Top Curve", metadata.textdomain)}>
@@ -73,6 +73,18 @@ export default function Edit(props) {
 					}}	
 					label={__("Height", metadata.textdomain)} 
 					/>
+					<div style={{display: "flex"}}>
+					<ToggleControl checked={props.attributes.topFlipX} onChange={(value) => props.setAttributes({topFlipX: value})} />
+					<span>
+						{__("Flip Horizontaly", metadata.textdomain)}
+					</span>
+				</div>
+				<div style={{display: "flex"}}>
+					<ToggleControl checked={props.attributes.topFlipY} onChange={(value) => props.setAttributes({topFlipY: value})} />
+					<span>
+						{__("Flip Vertically", metadata.textdomain)}
+					</span>
+				</div>
 				</>
 		}
 			</PanelBody>
