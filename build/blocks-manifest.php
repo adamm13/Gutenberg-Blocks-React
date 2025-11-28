@@ -14,12 +14,28 @@ return array(
 			
 		),
 		'supports' => array(
-			'html' => false
+			'html' => false,
+			'color' => array(
+				'background' => true,
+				'link' => true,
+				'text' => true
+			),
+			'spacing' => array(
+				'padding' => true
+			)
 		),
 		'attributes' => array(
+			'style' => array(
+				'type' => 'object',
+				'default' => array(
+					'color' => array(
+						'background' => '#ec4899'
+					)
+				)
+			),
 			'enableTopCurve' => array(
 				'type' => 'boolean',
-				'default' => 'true'
+				'default' => true
 			)
 		),
 		'textdomain' => 'blockylicious',
