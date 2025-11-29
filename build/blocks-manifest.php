@@ -60,6 +60,34 @@ return array(
 			'topFlipY' => array(
 				'type' => 'boolean',
 				'default' => false
+			),
+			'topColor' => array(
+				'type' => 'string',
+				'default' => '#FFFFFF'
+			),
+			'enableBottomCurve' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'bottomWidth' => array(
+				'type' => 'number',
+				'default' => 100
+			),
+			'bottomHeight' => array(
+				'type' => 'number',
+				'default' => 100
+			),
+			'bottomFlipX' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'bottomFlipY' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'bottomColor' => array(
+				'type' => 'string',
+				'default' => '#FFFFFF'
 			)
 		),
 		'textdomain' => 'blockylicious',

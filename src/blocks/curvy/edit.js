@@ -12,7 +12,10 @@ import { __ } from '@wordpress/i18n';
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import {HorizontalRule, PanelBody, ToggleControl, RangeControl} from "@wordpress/components";
+import { PanelBody, ToggleControl,} from "@wordpress/components";
+import { TopCurveSettings } from './components/topCurveSettings';	
+import { BottomCurveSettings } from './components/bottomCurveSettings';	
+
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -40,53 +43,37 @@ export default function Edit(props) {
 		<>
 		<section className={`${className} alignfull`} {...blockProps}> 
 			{props.attributes.enableTopCurve &&
-			<Curve height={props.attributes.topHeight} width={props.attributes.topWidth} />	}
+			<Curve 
+			color={props.attributes.topColor}
+			height={props.attributes.topHeight} 
+			width={props.attributes.topWidth}
+			flipX={props.attributes.topFlipX}
+			flipY={props.attributes.topFlipY} />	}
 		</section>	
 		<InspectorControls>
+			<PanelBody title={__("Bottom Curve", metadata.textdomain)}>
+				<div style={{ display: "flex" }}>
+					<ToggleControl
+						checked={props.attributes.enableBottomCurve}
+						onChange={(value) => props.setAttributes({ enableBottomCurve: value })}
+					/>
+					<span>{__("Enable Bottom Curve", metadata.textdomain)}</span>
+				</div>
+				{props.attributes.enableBottomCurve && (
+					<BottomCurveSettings attributes={props.attributes} setAttributes={props.setAttributes} />
+				)}
+			</PanelBody>
 			<PanelBody title={__("Top Curve", metadata.textdomain)}>
-				<div style={{display: "flex"}}>
-					<ToggleControl checked={props.attributes.enableTopCurve} onChange={(value) => props.setAttributes({enableTopCurve: value})} />
-					<span>
-						{__("Enable Top Curve", metadata.textdomain)}
-					</span>
-				</div>
-				{props.attributes.enableTopCurve &&
-				<>
-					<HorizontalRule />
-					<RangeControl 
-					min={100}
-					max={300}
-					value ={props.attributes.topWidth || 100}
-					onChange={(newValue) => {
-						props.setAttributes({
-							topWidth: newValue});
-					}}	
-					label={__("Width", metadata.textdomain)} 
+				<div style={{ display: "flex" }}>
+					<ToggleControl
+						checked={props.attributes.enableTopCurve}
+						onChange={(value) => props.setAttributes({ enableTopCurve: value })}
 					/>
-					<RangeControl 
-					min={0}
-					max={200}
-					value ={props.attributes.topHeight || 100}
-					onChange={(newValue) => {
-						props.setAttributes({
-							topHeight: newValue});
-					}}	
-					label={__("Height", metadata.textdomain)} 
-					/>
-					<div style={{display: "flex"}}>
-					<ToggleControl checked={props.attributes.topFlipX} onChange={(value) => props.setAttributes({topFlipX: value})} />
-					<span>
-						{__("Flip Horizontaly", metadata.textdomain)}
-					</span>
+					<span>{__("Enable Top Curve", metadata.textdomain)}</span>
 				</div>
-				<div style={{display: "flex"}}>
-					<ToggleControl checked={props.attributes.topFlipY} onChange={(value) => props.setAttributes({topFlipY: value})} />
-					<span>
-						{__("Flip Vertically", metadata.textdomain)}
-					</span>
-				</div>
-				</>
-		}
+				{props.attributes.enableTopCurve && (
+					<TopCurveSettings attributes={props.attributes} setAttributes={props.setAttributes} />
+				)}
 			</PanelBody>
 		</InspectorControls>
 	</>
