@@ -26,22 +26,37 @@ import { BottomCurveSettings } from './components/bottomCurveSettings';
 import './editor.scss';
 
 /**
- * The edit function describes the structure of your block in the context of the
+ * Edit Component - Block Editor Interface
+ * 
+ * The edit function describes the structure of the block in the context of the
  * editor. This represents what the editor will render when the block is used.
- *
+ * 
+ * This component renders:
+ * 1. A full-width section that displays the curves in the editor
+ * 2. InspectorControls (sidebar) with settings for both top and bottom curves
+ * 
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
  *
- * @return {Element} Element to render.
+ * @param {Object} props - Component properties
+ * @param {Object} props.attributes - Block attributes (curve settings, colors, etc.)
+ * @param {Function} props.setAttributes - Function to update block attributes
+ * 
+ * @return {JSX.Element} The block editor interface with curves and controls
  */
 import metadata from './block.json';
 import { Curve } from './components/curve';
 
 export default function Edit(props) {
+	// Extract className and spread remaining block props
+	// useBlockProps provides necessary attributes for the block wrapper
 	const { className, ...blockProps } = useBlockProps();
 	console.log({className})
+	
 	return (
 		<>
+		{/* Main section that contains the curves - uses alignfull for full-width display */}
 		<section className={`${className} alignfull`} {...blockProps}> 
+			{/* Top Curve - Only renders if enableTopCurve is true */}
 			{props.attributes.enableTopCurve &&
 			<Curve 
 			color={props.attributes.topColor}
@@ -50,6 +65,9 @@ export default function Edit(props) {
 			flipX={props.attributes.topFlipX}
 			flipY={props.attributes.topFlipY} />	
 			}
+			
+			{/* Bottom Curve - Only renders if enableBottomCurve is true */}
+			{/* Note: isBottom={true} positions this curve at the bottom of the section */}
 			{props.attributes.enableBottomCurve &&
 			<Curve
 			isBottom={true} 
@@ -60,8 +78,11 @@ export default function Edit(props) {
 			flipY={props.attributes.bottomFlipY} />	
 			}
 		</section>	
+		{/* InspectorControls - Sidebar settings panel in the block editor */}
 		<InspectorControls>
+			{/* Bottom Curve Panel - Contains toggle and settings for the bottom curve */}
 			<PanelBody title={__("Bottom Curve", metadata.textdomain)}>
+				{/* Toggle to enable/disable the bottom curve */}
 				<div style={{ display: "flex" }}>
 					<ToggleControl
 						checked={props.attributes.enableBottomCurve}
@@ -69,11 +90,15 @@ export default function Edit(props) {
 					/>
 					<span>{__("Enable Bottom Curve", metadata.textdomain)}</span>
 				</div>
+				{/* Conditionally render detailed settings only when bottom curve is enabled */}
 				{props.attributes.enableBottomCurve && (
 					<BottomCurveSettings attributes={props.attributes} setAttributes={props.setAttributes} />
 				)}
 			</PanelBody>
+			
+			{/* Top Curve Panel - Contains toggle and settings for the top curve */}
 			<PanelBody title={__("Top Curve", metadata.textdomain)}>
+				{/* Toggle to enable/disable the top curve */}
 				<div style={{ display: "flex" }}>
 					<ToggleControl
 						checked={props.attributes.enableTopCurve}
@@ -81,6 +106,7 @@ export default function Edit(props) {
 					/>
 					<span>{__("Enable Top Curve", metadata.textdomain)}</span>
 				</div>
+				{/* Conditionally render detailed settings only when top curve is enabled */}
 				{props.attributes.enableTopCurve && (
 					<TopCurveSettings attributes={props.attributes} setAttributes={props.setAttributes} />
 				)}
