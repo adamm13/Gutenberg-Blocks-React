@@ -93,6 +93,7 @@ return array(
 		'textdomain' => 'blockylicious',
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
-		'style' => 'file:./style-index.css'
+		'style' => 'file:./style-index.css',
+		'render' => 'file:./render.php'
 	)
 );
