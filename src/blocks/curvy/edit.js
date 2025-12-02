@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { useBlockProps, InspectorControls, InnerBlocks } from '@wordpress/block-editor';
 import { PanelBody, ToggleControl,} from "@wordpress/components";
 import { TopCurveSettings } from './components/topCurveSettings';	
 import { BottomCurveSettings } from './components/bottomCurveSettings';	
@@ -65,6 +65,9 @@ export default function Edit(props) {
 			flipX={props.attributes.topFlipX}
 			flipY={props.attributes.topFlipY} />	
 			}
+			
+			{/* InnerBlocks allows nested content within this block */}
+			<InnerBlocks />
 			
 			{/* Bottom Curve - Only renders if enableBottomCurve is true */}
 			{/* Note: isBottom={true} positions this curve at the bottom of the section */}

@@ -34,9 +34,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+/**
+ * BottomCurveSettings Component
+ * 
+ * Provides the inspector controls (sidebar settings) for customizing the bottom curve.
+ * Includes controls for width, height, flip options, and color selection.
+ * Mirrors the functionality of TopCurveSettings but for the bottom curve.
+ * 
+ * @param {Object} props - Component properties
+ * @param {Object} props.attributes - Block attributes containing curve settings
+ * @param {Function} props.setAttributes - Function to update block attributes
+ * 
+ * @returns {JSX.Element} Inspector controls for bottom curve customization
+ */
+
 const BottomCurveSettings = props => {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.HorizontalRule, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.RangeControl, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.HorizontalRule, {}), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.RangeControl, {
       min: 100,
       max: 300,
       value: props.attributes.bottomWidth || 100,
@@ -80,7 +94,7 @@ const BottomCurveSettings = props => {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
         children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Flip Vertically", _block_json__WEBPACK_IMPORTED_MODULE_2__.textdomain)
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.HorizontalRule, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.HorizontalRule, {}), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
         children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Curve Color", _block_json__WEBPACK_IMPORTED_MODULE_2__.textdomain)
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.ColorPalette, {
@@ -108,40 +122,67 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
 
+/**
+ * Curve Component
+ * 
+ * Renders an SVG-based curved shape divider that can be positioned at the top or bottom of a section.
+ * The curve uses predefined SVG paths that create a wave-like appearance.
+ * 
+ * @param {Object} props - Component properties
+ * @param {boolean} props.isBottom - If true, positions the curve at the bottom; otherwise at the top
+ * @param {string} props.color - Fill color for the curve (e.g., "#FFFFFF", "white")
+ * @param {number} props.height - Height of the curve container in pixels
+ * @param {number} props.width - Width percentage of the curve (100-300)
+ * @param {boolean} props.flipX - If true, flips the curve horizontally
+ * @param {boolean} props.flipY - If true, flips the curve vertically (rotates 180deg)
+ * 
+ * @returns {JSX.Element} An absolutely positioned div containing the SVG curve
+ */
 const Curve = props => {
+  // Normal wave path - curves downward from left to right
   const normalPath = "M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z";
+
+  // Inverted wave path - curves upward from left to right
   const invertedPath = "M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z";
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-    style: {
-      position: "absolute",
-      top: !props.isBottom ? 0 : "initial",
-      bottom: props.isBottom ? 0 : "initial",
-      left: 0,
-      width: "100%",
-      overflow: "hidden",
-      height: props.height,
-      transform: `scaleX(${props.flipX ? -1 : 1}) rotate(${props.flipY ? "180deg" : 0}) scaleY(${props.isBottom ? -1 : 1})`
-    },
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", {
-        preserveAspectRatio: "none",
-        style: {
-          position: "absolute",
-          top: 0,
-          left: 0,
-          height: props.height,
-          width: `${props.width}%`
-        },
-        viewBox: "0 0 1200 120",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+  return (
+    /*#__PURE__*/
+    // Outer wrapper - absolutely positioned container for the curve
+    (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+      style: {
+        position: "absolute",
+        // Position at top (0) for top curves, or bottom (0) for bottom curves
+        top: !props.isBottom ? 0 : "initial",
+        bottom: props.isBottom ? 0 : "initial",
+        left: 0,
+        width: "100%",
+        overflow: "hidden",
+        // Clips any overflow to prevent scrollbars
+        height: props.height,
+        // Apply transforms: flipX mirrors horizontally, flipY rotates 180deg, isBottom flips for bottom positioning
+        transform: `scaleX(${props.flipX ? -1 : 1}) rotate(${props.flipY ? "180deg" : 0}) scaleY(${props.isBottom ? -1 : 1})`
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", {
+          preserveAspectRatio: "none" // Stretches to fill container without maintaining aspect ratio
+          ,
           style: {
-            fill: props.color || "white"
+            position: "absolute",
+            top: 0,
+            left: 0,
+            height: props.height,
+            width: `${props.width}%` // Width as percentage allows curves wider than container
           },
-          d: props.flipY ? invertedPath : normalPath
+          viewBox: "0 0 1200 120",
+          children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", {
+            style: {
+              fill: props.color || "white"
+            },
+            d: props.flipY ? invertedPath : normalPath // Switch between normal and inverted path based on flipY
+          })]
         })
       })
     })
-  });
+  );
 };
 
 /***/ }),
@@ -168,9 +209,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+/**
+ * TopCurveSettings Component
+ * 
+ * Provides the inspector controls (sidebar settings) for customizing the top curve.
+ * Includes controls for width, height, flip options, and color selection.
+ * 
+ * @param {Object} props - Component properties
+ * @param {Object} props.attributes - Block attributes containing curve settings
+ * @param {Function} props.setAttributes - Function to update block attributes
+ * 
+ * @returns {JSX.Element} Inspector controls for top curve customization
+ */
+
 const TopCurveSettings = props => {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.HorizontalRule, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.RangeControl, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.HorizontalRule, {}), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.RangeControl, {
       min: 100,
       max: 300,
       value: props.attributes.topWidth || 100,
@@ -214,7 +268,7 @@ const TopCurveSettings = props => {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
         children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Flip Vertically", _block_json__WEBPACK_IMPORTED_MODULE_2__.textdomain)
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.HorizontalRule, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.HorizontalRule, {}), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
         children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Curve Color", _block_json__WEBPACK_IMPORTED_MODULE_2__.textdomain)
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.ColorPalette, {
@@ -279,17 +333,29 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /**
- * The edit function describes the structure of your block in the context of the
+ * Edit Component - Block Editor Interface
+ * 
+ * The edit function describes the structure of the block in the context of the
  * editor. This represents what the editor will render when the block is used.
- *
+ * 
+ * This component renders:
+ * 1. A full-width section that displays the curves in the editor
+ * 2. InspectorControls (sidebar) with settings for both top and bottom curves
+ * 
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
  *
- * @return {Element} Element to render.
+ * @param {Object} props - Component properties
+ * @param {Object} props.attributes - Block attributes (curve settings, colors, etc.)
+ * @param {Function} props.setAttributes - Function to update block attributes
+ * 
+ * @return {JSX.Element} The block editor interface with curves and controls
  */
 
 
 
 function Edit(props) {
+  // Extract className and spread remaining block props
+  // useBlockProps provides necessary attributes for the block wrapper
   const {
     className,
     ...blockProps
@@ -307,7 +373,8 @@ function Edit(props) {
         width: props.attributes.topWidth,
         flipX: props.attributes.topFlipX,
         flipY: props.attributes.topFlipY
-      }), props.attributes.enableBottomCurve && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_curve__WEBPACK_IMPORTED_MODULE_7__.Curve, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks, {}), props.attributes.enableBottomCurve && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_curve__WEBPACK_IMPORTED_MODULE_7__.Curve, {
+        isBottom: true,
         color: props.attributes.bottomColor,
         height: props.attributes.bottomHeight,
         width: props.attributes.bottomWidth,
@@ -457,9 +524,10 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 function save() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
-    ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save(),
-    children: 'Curvy – hello from the saved content!'
+  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save();
+  const innerBlocksProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useInnerBlocksProps.save(blockProps);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    ...innerBlocksProps
   });
 }
 
